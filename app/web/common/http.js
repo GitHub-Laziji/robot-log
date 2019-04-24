@@ -11,6 +11,9 @@ service.interceptors.response.use(
     switch (data.code) {
       case 200:
         return data.data;
+      default:
+        alert(data.message);
+        break;
     }
     return Promise.reject('error')
   },

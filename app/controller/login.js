@@ -10,15 +10,14 @@ class LoginController extends Controller {
   }
 
   async login() {
-    this.ctx.session.user = null;
-    const { username } = this.ctx.query;
-    if (!username) {
+    const form = this.ctx.request.body;
+    if (!form.username) {
       this.ctx.body = Response.error("用户名为空");
       return;
     }
     const db = new Database();
     await db.connect();
-    const user = await db.get('select * from user where username=?', username);
+    const user = await db.get('select * from user where username=?', form.username);
     if (!user) {
       this.ctx.body = Response.error("用户不存在");
       return;
