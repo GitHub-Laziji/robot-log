@@ -3,7 +3,7 @@ const path = require('path');
 const fs = require('fs');
 module.exports = app => {
   const exports = {};
-
+  
   exports.vuessr = {
     layout: path.join(app.baseDir, 'app/web/index.html')
   };
