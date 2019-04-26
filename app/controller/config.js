@@ -1,13 +1,14 @@
 const Controller = require('egg').Controller;
 const Promise = require("bluebird");
 const Database = require("../common/database");
+const Response = require("../common/response");
 
 class ConfigController extends Controller {
 
   async get() {
     let user = this.ctx.session.user;
     if (!user) {
-      this.ctx.body = {};
+      this.ctx.body = Response.error("");
       return;
     }
     let db = new Database();
@@ -25,7 +26,7 @@ class ConfigController extends Controller {
     }
 
     let result = await db.get("select * from config where user_id=?", [user.id]);
-    this.ctx.body = { config: result, user: user };
+    this.ctx.body = Response.success(result);
   }
 
   async update() {

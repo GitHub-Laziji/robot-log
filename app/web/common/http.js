@@ -1,4 +1,5 @@
 import axios from 'axios'
+import Vue from 'vue'
 
 const service = axios.create({
   baseURL: "/api",
@@ -12,12 +13,13 @@ service.interceptors.response.use(
       case 200:
         return data.data;
       default:
-        alert(data.message);
+        Vue.prototype.$message.error(data.message || "请求失败");
         break;
     }
     return Promise.reject('error')
   },
   error => {
+    Vue.prototype.$message.error("请求失败");
     return Promise.reject('error');
   }
 );

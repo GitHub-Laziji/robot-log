@@ -1,16 +1,11 @@
 {
-  "name": "easy-element-admin",
+  "name": "robot-log",
   "version": "1.0.0",
-  "description": "基于 Egg + Vue + Webpack ＋ Element 单页面管理系统骨架",
+  "description": "",
   "scripts": {
     "dev": "egg-bin dev",
     "start": "egg-scripts start",
-    "debug": "egg-bin debug",
-    "clean": "easy clean all",
-    "build": "easywebpack build prod",
-    "lint": "eslint .",
-    "fix": "eslint --fix .",
-    "ii": "npm install --registry https://registry.npm.taobao.org"
+    "build": "easywebpack build prod"
   },
   "dependencies": {
     "axios": "^0.17.1",
@@ -65,12 +60,5 @@
   },
   "ci": {
     "version": "8, 10"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/easy-team/egg-vue-webpack-boilerplate.git"
-  },
-  "author": "hubcarl@126.com",
-  "license": "MIT",
-  "homepage": "https://github.com/easy-team/egg-vue-webpack-boilerplate"
+  }
 }

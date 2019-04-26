@@ -5,10 +5,6 @@ const Response = require("../common/response");
 
 class LoginController extends Controller {
 
-  async test(){
-    this.ctx.body = Response.success("aaa");
-  }
-
   async login() {
     const form = this.ctx.request.body;
     if (!form.username) {
@@ -27,20 +23,20 @@ class LoginController extends Controller {
   }
 
   async sign() {
-    const { username } = this.ctx.query;
-    if (!username) {
+    const form = this.ctx.request.body;
+    if (!form.username) {
       this.ctx.body = Response.error("用户名为空");
       return;
     }
     const db = new Database();
     await db.connect();
-    const result = await db.get("select count(*) c from user where username=?", username);
+    const result = await db.get("select count(*) c from user where username=?", form.username);
     if (result.c) {
       this.ctx.body = Response.error("用户已存在");
       return;
     }
-    await db.run("insert into user(username) values(?)", username);
-    const user = await db.get("select * from user where username=?", username);
+    await db.run("insert into user(username) values(?)", form.username);
+    const user = await db.get("select * from user where username=?", form.username);
     await db.run("insert into config(user_id,base_url,branch,author,format) values(?,?,?,?,?)", [
       user.id,
       "https://gitlab.com/xxx/xxx/",

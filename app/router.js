@@ -5,5 +5,6 @@ module.exports = app => {
 
   router.post('/api/login', controller.login.login);
   router.post('/api/sign', controller.login.sign);
-  router.get('/api/test', controller.login.test);
+  router.get('/api/config', controller.config.get);
+  router.post("/api/config", controller.config.update);
 };
