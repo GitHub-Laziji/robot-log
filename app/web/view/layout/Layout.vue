@@ -13,7 +13,7 @@
             <template slot="title">
               <span class="text-uppercase font-weight-bold">{{context.session.user.username}}</span>
             </template>
-            <el-menu-item index="1">退出登录</el-menu-item>
+            <el-menu-item index="1" @click="logout">退出登录</el-menu-item>
           </el-submenu>
         </el-menu>
       </div>
@@ -30,6 +30,7 @@
 <script>
   import { menuRouterMap } from "../../router"
   import { mapGetters } from 'vuex'
+  import { Http } from "../../common/http"
 
   export default {
     computed: {
@@ -46,6 +47,9 @@
     methods: {
       handleSelect(key) {
         console.log(key);
+      },
+      logout(){
+        console.log(11);
       }
     }
   };

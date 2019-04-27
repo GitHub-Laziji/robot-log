@@ -22,6 +22,11 @@ class LoginController extends Controller {
     this.ctx.body = Response.success(user);
   }
 
+  async logout(){
+    this.ctx.session.user = null;
+    this.ctx.body = Response.success();
+  }
+
   async sign() {
     const form = this.ctx.request.body;
     if (!form.username) {
