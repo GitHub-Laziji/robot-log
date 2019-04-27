@@ -44,7 +44,7 @@ class LoginController extends Controller {
       "*",
       "${startTime} ~ ${endTime} ${title}"]);
     this.ctx.session.user = user;
-    this.ctx.body = Response.success();
+    this.ctx.body = Response.success(user);
   }
 }
 

@@ -22,29 +22,37 @@
 </template>
 
 <script>
-import { Http } from "../common/http"
-export default {
-  data() {
-    return {
-      form: {
-        username: null
-      },
-      rules: {
-        username: [{ required: true, message: "请输入用户名", trigger: "blur" }]
-      }
-    };
-  },
-  mounted() {},
-  methods: {
-    submit() {
-      this.$refs["form"].validate(valid => {
-        if (valid) {
-          Http.post("/login", this.form).then(result => {
-            location.href = "#/home/config";
-          });
+  import { Http } from "../common/http"
+  import { mapGetters } from 'vuex'
+
+  export default {
+    computed: {
+      ...mapGetters([
+        'context',
+      ])
+    },
+    data() {
+      return {
+        form: {
+          username: null
+        },
+        rules: {
+          username: [{ required: true, message: "请输入用户名", trigger: "blur" }]
         }
-      });
+      };
+    },
+    mounted() { },
+    methods: {
+      submit() {
+        this.$refs["form"].validate(valid => {
+          if (valid) {
+            Http.post("/login", this.form).then(result => {
+              this.context.session.user = result;
+              location.href = "#/home/config";
+            });
+          }
+        });
+      }
     }
-  }
-};
+  };
 </script>
