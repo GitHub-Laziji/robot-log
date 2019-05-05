@@ -5,6 +5,10 @@ class CommonUtils {
       return String.fromCharCode(parseInt($2, $1 ? 16 : 10));
     });
   }
+
+  static test(){
+    return "aaa";
+  }
 }
 
 module.exports = CommonUtils

@@ -40,4 +40,12 @@ export class Http {
       method: "post"
     });
   }
+
+  static put(url, param) {
+    return service({
+      url: url,
+      data: param,
+      method: "put"
+    });
+  }
 }

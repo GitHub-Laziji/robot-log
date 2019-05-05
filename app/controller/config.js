@@ -13,34 +13,24 @@ class ConfigController extends Controller {
     }
     let db = new Database();
     await db.connect();
-    let query = this.ctx.query;
-    if (JSON.stringify(query) != "{}") {
-      db.run("update config set base_url=?,branch=?,author=?,format=?,version=? where id=? and user_id=?", [
-        query.baseUrl,
-        query.branch,
-        query.author,
-        query.format,
-        query.version,
-        query.id,
-        user.id]);
-    }
-
     let result = await db.get("select * from config where user_id=?", [user.id]);
     this.ctx.body = Response.success(result);
   }
 
   async update() {
+    console.log("---------------------------------");
     let user = this.ctx.session.user;
     if (!user) {
-      this.ctx.redirect('/login');
+      this.ctx.body = Response.error("");
       return;
     }
     let db = new Database();
     await db.connect();
-    let query = this.ctx.query;
+    let query = this.ctx.request.body;
+    console.log(query);
     if (JSON.stringify(query) != "{}") {
       db.run("update config set base_url=?,branch=?,author=?,format=?,version=? where id=? and user_id=?", [
-        query.baseUrl,
+        query.base_url,
         query.branch,
         query.author,
         query.format,
@@ -48,9 +38,8 @@ class ConfigController extends Controller {
         query.id,
         user.id]);
     }
-
     let result = await db.get("select * from config where user_id=?", [user.id]);
-    this.ctx.body = { config: result, user: user };
+    this.ctx.body = Response.success(result);
   }
 }
 

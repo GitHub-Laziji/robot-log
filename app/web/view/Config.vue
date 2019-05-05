@@ -4,7 +4,7 @@
       <div class="pt-4" style="width: 450px">
         <el-form :model="form" :rules="rules" ref="form" label-position="right" label-width="80px">
           <el-form-item label="项目地址" prop="baseUrl">
-            <el-input v-model="form.baseUrl" placeholder="项目地址"></el-input>
+            <el-input v-model="form.base_url" placeholder="项目地址"></el-input>
           </el-form-item>
           <el-form-item label="分支名" prop="branch">
             <el-input v-model="form.branch" placeholder="分支名"></el-input>
@@ -34,16 +34,16 @@ export default {
     };
   },
   mounted() {
-    Http.get("/api/config").then(result => {
-      console.log(result);
+    Http.get("/config").then(result => {
+      this.form = result;
     });
   },
   methods: {
     submit() {
       this.$refs["form"].validate(valid => {
         if (valid) {
-          Http.post("/login", this.form).then(result => {
-            this.$message.success("登录成功");
+          Http.put("/config", this.form).then(result => {
+            this.$message.success("修改成功");
           });
         }
       });
