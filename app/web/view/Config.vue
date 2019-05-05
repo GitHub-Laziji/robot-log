@@ -34,7 +34,7 @@ export default {
     };
   },
   mounted() {
-    Http.get("/config").then(result => {
+    Http.get("/api/config").then(result => {
       console.log(result);
     });
   },

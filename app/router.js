@@ -9,4 +9,5 @@ module.exports = app => {
   
   router.get('/api/config', controller.config.get);
   router.post("/api/config", controller.config.update);
+  router.put("/api/config", controller.config.update);
 };
