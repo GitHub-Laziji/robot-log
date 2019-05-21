@@ -2,9 +2,17 @@
   <div class="d-flex flex-column bg-writer" style="min-height:100vh">
     <div class="d-flex justify-content-between align-items-center">
       <div style="flex:1">
-        <el-menu class="px-4" :default-active="activeIndex" mode="horizontal" @select="handleSelect">
-          <el-menu-item v-for="item in menuRouterMap" :key="item.path" :index="item.path">{{item.meta.title}}
-          </el-menu-item>
+        <el-menu
+          class="px-4"
+          :default-active="activeIndex"
+          mode="horizontal"
+          @select="handleSelect"
+        >
+          <el-menu-item
+            v-for="item in menuRouterMap"
+            :key="item.path"
+            :index="item.path"
+          >{{item.meta.title}}</el-menu-item>
         </el-menu>
       </div>
       <div>
@@ -19,38 +27,36 @@
       </div>
     </div>
 
-
     <div class="px-4 py-3">
-      <router-view />
+      <router-view/>
     </div>
-
   </div>
 </template>
 
 <script>
-  import { menuRouterMap } from "../../router"
-  import { mapGetters } from 'vuex'
-  import { Http } from "../../common/http"
+import { menuRouterMap } from "../../router";
+import { mapGetters } from "vuex";
+import { Http } from "../../common/http";
 
-  export default {
-    computed: {
-      ...mapGetters([
-        'context'
-      ])
+export default {
+  computed: {
+    ...mapGetters(["context"])
+  },
+  data() {
+    return {
+      menuRouterMap,
+      activeIndex: "config"
+    };
+  },
+  methods: {
+    handleSelect(key) {
+      location.href = "/#/home/"+key;
     },
-    data() {
-      return {
-        menuRouterMap,
-        activeIndex: "config"
-      };
-    },
-    methods: {
-      handleSelect(key) {
-        console.log(key);
-      },
-      logout(){
-        console.log(11);
-      }
+    logout() {
+      Http.post("/logout", this.form).then(result => {
+        location.href = "/";
+      });
     }
-  };
+  }
+};
 </script>

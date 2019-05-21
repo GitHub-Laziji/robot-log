@@ -14,7 +14,7 @@ export const menuRouterMap = [{
   meta: {
     title: "日报"
   },
-  component: () => import('./view/Config')
+  component: () => import('./view/DayLog')
 }]
 
 export const routerMap = [{

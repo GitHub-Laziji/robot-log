@@ -6,6 +6,7 @@ const vm = require('vm');
 const Database = require("../common/database");
 const GeneralDate = require("../common/date");
 const CommonUtils = require("../common/utils");
+const Response = require("../common/response");
 
 const Segment = require('segment');
 const segment = new Segment();
