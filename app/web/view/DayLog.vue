@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="px-4 py-2">
+    <div class="px-4 py-3">
       <div class="d-flex">
         <el-input v-model="query.limit" placeholder="Limit" style="width:150px"></el-input>
         <el-button type="primary" @click="listDay"  style="margin-left:8px">查询</el-button>
