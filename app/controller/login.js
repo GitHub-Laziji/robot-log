@@ -22,6 +22,14 @@ class LoginController extends Controller {
     this.ctx.body = Response.success(user);
   }
 
+  async user(){
+    if (!this.ctx.session.user) {
+      this.ctx.body = Response.error("未登录");
+      return;
+    }
+    this.ctx.body = Response.success(this.ctx.session.user);
+  }
+
   async logout(){
     this.ctx.session.user = null;
     this.ctx.body = Response.success();

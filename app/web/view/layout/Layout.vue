@@ -19,7 +19,9 @@
         <el-menu class="px-4" mode="horizontal">
           <el-submenu index="0">
             <template slot="title">
-              <span class="text-uppercase font-weight-bold">{{context.session.user.username}}</span>
+              <span
+                class="text-uppercase font-weight-bold"
+              >{{context.session.user&&context.session.user.username}}</span>
             </template>
             <el-menu-item index="1" @click="logout">退出登录</el-menu-item>
           </el-submenu>
@@ -48,9 +50,16 @@ export default {
       activeIndex: "config"
     };
   },
+  mounted() {
+    if (!this.context.session.user) {
+      Http.get("/user").then(result => {
+        this.$set(this.context.session,"user",result)
+      });
+    }
+  },
   methods: {
     handleSelect(key) {
-      location.href = "/#/home/"+key;
+      location.href = "/#/home/" + key;
     },
     logout() {
       Http.post("/logout", this.form).then(result => {
