@@ -27,7 +27,7 @@
       </div>
     </div>
 
-    <div class="px-4 py-3">
+    <div style="flex:1;background: #fcfcfc;">
       <router-view/>
     </div>
   </div>

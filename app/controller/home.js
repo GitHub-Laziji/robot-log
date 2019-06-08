@@ -41,10 +41,7 @@ class HomeController extends Controller {
       return;
     }
     let logs = await this.getCommits(0, this.ctx.query.limit || 40);
-    await this.ctx.render('day-log.tpl', {
-      logs: logs,
-      user: this.ctx.session.user
-    });
+    this.ctx.body = Response.success(logs);
   }
 
   async week() {
@@ -61,8 +58,7 @@ class HomeController extends Controller {
         logs.push(...dayLog.list);
       }
     }
-    // console.log(segment.doSegment(CommonUtils.htmlDecode(item.title)));
-    await this.ctx.render('week-log.tpl', {
+    this.ctx.body = Response.success({
       endDate: today.getDate(),
       startDate: new GeneralDate(new Date().getTime() - today.getWeekNumber() * 60 * 60 * 24 * 1000).getDate(),
       logs: logs,

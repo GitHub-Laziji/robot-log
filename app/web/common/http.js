@@ -26,9 +26,13 @@ service.interceptors.response.use(
 export class Http {
 
   static get(url, param) {
+    console.log(param)
+    url+="?";
+    for(let k in  param){
+      url+=`${k}=${param[k]}&`;
+    }
     return service({
       url: url,
-      data: param,
       method: "get"
     });
   }
